@@ -2,14 +2,15 @@
 
 This is something I like to play with when I am bored, nothing serious here.
 
-## Compile
+## Compile and run
 
 Windows and MINGW32/MSYS assumed.
 
 ```
-make deps
-make all
-make SDL2.dll
+chmod +x deps.sh
+make deps       # download dependencies, see deps.sh for details
+make all        # make executable
+make SDL2.dll   # copy SDL2.dll from 3rdparty bin dir
 
-./main.exe
+./main.exe      # run app
 ```
