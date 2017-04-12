@@ -1,0 +1,4 @@
+*.dll
+*.exe
+build/
+3rdparty/
