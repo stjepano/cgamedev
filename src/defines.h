@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #define ABORT_EXIT_CODE 222
 
@@ -14,14 +15,6 @@ typedef unsigned char uchar;
 typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned long ulong;
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-
-#ifndef FALSE
-#define FALSE 0
-#endif
 
 #define MALLOC(sz) malloc((sz))
 #define FREE(ptr) if ((ptr) != NULL) { free((ptr)); ptr=NULL; }
