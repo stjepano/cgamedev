@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define ABORT_EXIT_CODE 222
+
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
@@ -33,6 +35,6 @@ typedef unsigned long ulong;
 #endif
 
 #define LOG(msg, ...) fprintf(stderr, (msg), ##__VA_ARGS__)
-#define ABORT(msg, ...) { fprintf(stderr, msg, ##__VA_ARGS__); fflush(stderr); exit(222); }
+#define ABORT(msg, ...) { fprintf(stderr, msg, ##__VA_ARGS__); fflush(stderr); exit(ABORT_EXIT_CODE); }
 
 #endif
