@@ -39,6 +39,9 @@ int main(int argc, char** argv)
                 case SDL_QUIT:
                     g_quit = true;
                     break;
+                case SDL_KEYDOWN:
+                    if (event.key.keysym.sym == SDLK_ESCAPE) g_quit = true;
+                    break;
             }
         }
 
