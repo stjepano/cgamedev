@@ -7,7 +7,7 @@ COPY=cp
 3RDPARTY_LIB_DIR=3rdparty/lib
 3RDPARTY_BIN_DIR=3rdparty/bin
 
-CFLAGS=-g -std=c11 -I$(3RDPARTY_INCLUDE_DIR)
+CFLAGS=-flto -g -std=c11 -I$(3RDPARTY_INCLUDE_DIR)
 LDFLAGS=-L$(3RDPARTY_LIB_DIR) -w -lmingw32 -lglew32 -lopengl32 -lSDL2main -lSDL2
 
 BUILDDIR=build
