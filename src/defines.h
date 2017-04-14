@@ -27,7 +27,7 @@ typedef unsigned long ulong;
 #define LOGFILE stdout
 #endif
 
-#define LOG(msg, ...) fprintf(stderr, (msg), ##__VA_ARGS__)
-#define ABORT(msg, ...) { fprintf(stderr, msg, ##__VA_ARGS__); fflush(stderr); exit(ABORT_EXIT_CODE); }
+#define LOG(msg, ...) fprintf(LOGFILE, (msg), ##__VA_ARGS__)
+#define ABORT(msg, ...) { fprintf(LOGFILE, msg, ##__VA_ARGS__); fflush(LOGFILE); exit(ABORT_EXIT_CODE); }
 
 #endif
