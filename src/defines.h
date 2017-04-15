@@ -22,7 +22,7 @@ typedef unsigned long   ulong;
 #define FREE(ptr) if ((ptr) != NULL) { free((ptr)); ptr=NULL; }
 
 #define OK(res) (res) == NO_ERROR
-#define NOTOK(res) (res) != NO_ERROR
+#define FAILED(res) (res) != NO_ERROR
 #define ISNULL(ptr) (ptr) == NULL
 
 #ifndef LOGFILE
