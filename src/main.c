@@ -25,13 +25,21 @@ GLuint  g_vbo       = 0;
 GLuint  g_ebo       = 0;
 GLuint  g_program   = 0;
 
+config_t* g_config;
+
 error_t InitOpenGL();
 void Render();
+
+void PrintConfigEntry(const char* key, const char* value)
+{
+    LOG("config entry: '%s' = '%s'\n", key, value);
+}
 
 int main(int argc, char** argv) 
 {
     LOG("Demo 01\n");
-    CNF_Load("config.cfg", NULL);
+    CNF_Load("config.cfg", &g_config);
+    CNF_Visit(config, PrintConfigEntry);
 
     SDL_Window* window = NULL;
     SDL_Surface* surface = NULL;
@@ -90,7 +98,7 @@ int main(int argc, char** argv)
     glDeleteProgram(g_program);
     SDL_DestroyWindow(window);
     SDL_Quit();
-
+    CNF_Destroy(&g_config);
     LOG("Bye bye, thanks for playing\n");
     return 0;
 }

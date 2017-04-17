@@ -1,9 +1,15 @@
 #include "config.h"
+#include "config.lex.h"
 
 extern FILE* yyin;
 extern int yylex();
+extern cnf_keyval_t* cnf_keyvals_head;
 
 #define CNF_ERR_CODE 267
+
+typedef struct config_s {
+    cnf_keyval_t* head;
+} config_t;
 
 
 error_t CNF_Load(const char* path, config_t** config)
@@ -15,10 +21,43 @@ error_t CNF_Load(const char* path, config_t** config)
     }
     yyin = file;
     yylex();
+
+    config_t* cnf = (config_t*) malloc(sizeof(config_t));
+    cnf->head = cnf_keyvals_head;
+
+    *config = cnf;
+
     return NoError();
 }
 
 void CNF_Destroy(config_t** config)
 {
+    if (config == NULL) return;
+    config_t* cnf = (*config);
+    if (cnf == NULL) return;
 
+    cnf_keyval_t *it = cnf->head, *tmp = NULL;
+    while (it != NULL)
+    {
+        tmp = it->next;
+        FREE(it->key);
+        FREE(it->value);
+        FREE(it);
+        it = tmp;
+    }
+
+    FREE(cnf);
+    *config = NULL;
+}
+
+
+void CNF_Visit(const config_t* config, cnf_visit_f visit_f)
+{
+    if (config == NULL) return;
+    cnf_keyval_t* it = config->head;
+    while (it != NULL)
+    {
+        visit_f(it->key, it->value);
+        it = it->next;
+    }
 }
