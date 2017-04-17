@@ -25,7 +25,7 @@ error_t STR_ParseResolution(const char* str, int* width, int* height)
     resptr++;
     
     int h = atoi(resptr);
-    int w = atoi(resptr);
+    int w = atoi(str);
     
     if (height != NULL) (*height) = h;
     if (width != NULL) (*width) = w;

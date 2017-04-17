@@ -1,6 +1,8 @@
 #ifndef STRUTILS_H_
 #define STRUTILS_H_
 
+#include "defines.h"
+
 /// Copy str into newly allocated string and return it
 char* STR_strdup(const char* str);
 

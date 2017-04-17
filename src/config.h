@@ -16,4 +16,15 @@ bool CNF_Has(const config_t* config, const char* key);
 const char* CNF_Get(const config_t* config, const char* key);
 const char* CNF_GetD(const config_t* config, const char* key, const char* dval);
 
+
+typedef struct display_config_s
+{
+    int width, height;
+    bool fullscreen;
+    const char* title;
+} display_config_t;
+
+
+error_t CNF_LoadDisplayConfig(const config_t* config, display_config_t* out);
+
 #endif

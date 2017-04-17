@@ -4,14 +4,13 @@
 #include "GL/glew.h"
 
 #include <SDL2/SDL_opengl.h>
+#include <string.h>
 
 
 #include "defines.h"
 #include "gltools.h"
 #include "config.h"
-
-#define SCREEN_WIDTH 1024
-#define SCREEN_HEIGHT 768
+#include "strutils.h"
 
 #define USE_GL_MAJOR_VERSION 3
 #define USE_GL_MINOR_VERSION 3
@@ -26,6 +25,9 @@ GLuint  g_ebo       = 0;
 GLuint  g_program   = 0;
 
 config_t* g_config = NULL;
+
+// initialized from config ...
+display_config_t dpy;
 
 error_t InitOpenGL();
 void Render();
@@ -47,6 +49,8 @@ int main(int argc, char** argv)
     CNF_Load("config.cfg", &g_config);
     CNF_Visit(g_config, PrintConfigEntry);
 
+    CNF_LoadDisplayConfig(g_config, &dpy);
+
     SDL_Window* window = NULL;
     SDL_Surface* surface = NULL;
     SDL_GLContext gl_context = NULL;
@@ -60,7 +64,12 @@ int main(int argc, char** argv)
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, USE_GL_MINOR_VERSION);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-    window = SDL_CreateWindow("Demo 01", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    int window_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
+    if (dpy.fullscreen)
+    {
+        window_flags |= SDL_WINDOW_FULLSCREEN;
+    }
+    window = SDL_CreateWindow(dpy.title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, dpy.width, dpy.height, window_flags);
     if ( ISNULL(window) )
     {
         ABORT("Failed to create window!\n");
@@ -136,7 +145,7 @@ error_t InitOpenGL()
     
 
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-    glViewport(0, 0, SCREEN_WIDTH-1, SCREEN_HEIGHT-1);
+    glViewport(0, 0, dpy.width-1, dpy.height-1);
 
     GLfloat vertices[] = {
         -0.5f, -0.5f, 0.0f,
