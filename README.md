@@ -4,7 +4,8 @@ This is something I like to play with when I am bored, nothing serious here.
 
 ## Prerequisites
 
-Optionally make sure you have flex installed
+* SDL2
+* Optionally, flex
 
 ## Compile and run
 
