@@ -3,6 +3,8 @@
 extern FILE* yyin;
 extern int yylex();
 
+#define CNF_ERR_CODE 267
+
 
 error_t CNF_Load(const char* path, config_t** config)
 {

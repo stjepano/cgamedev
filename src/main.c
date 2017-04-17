@@ -8,6 +8,7 @@
 
 #include "defines.h"
 #include "gltools.h"
+#include "config.h"
 
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 768
@@ -30,6 +31,7 @@ void Render();
 int main(int argc, char** argv) 
 {
     LOG("Demo 01\n");
+    CNF_Load("config.cfg", NULL);
 
     SDL_Window* window = NULL;
     SDL_Surface* surface = NULL;
