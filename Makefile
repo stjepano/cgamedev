@@ -31,8 +31,8 @@ lex: $(SOURCEDIR)/config.lex.c
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.c ${HEADERS}
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(SOURCEDIR)/%.lex.c: $(SOURCEDIR)/%.lex.l
-	$(LEX) -o $@ $^
+$(SOURCEDIR)/%.lex.c: $(SOURCEDIR)/%.lex.l ${HEADERS}
+	$(LEX) -o $@ $<
 
 $(BINARY): ${OBJECTS}
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)

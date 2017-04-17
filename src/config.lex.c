@@ -394,13 +394,11 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[44] =
+static yyconst flex_int16_t yy_accept[26] =
     {   0,
         0,    0,    7,    7,    8,    8,   11,   10,    2,    1,
         3,    5,    4,    7,    8,    9,    0,    5,    3,    5,
-        6,    4,    7,    8,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    0
+        6,    4,    7,    8,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -440,48 +438,40 @@ static yyconst flex_int32_t yy_meta[9] =
         1,    2,    3,    4,    2,    5,    1,    5
     } ;
 
-static yyconst flex_int16_t yy_base[68] =
+static yyconst flex_int16_t yy_base[32] =
     {   0,
-        0,    0,    7,   11,   57,   56,   59,   62,   15,   62,
-        0,   21,    0,    0,    0,   62,    0,    0,    0,    0,
-       62,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,   62,   62,   25,   30,   35,   53,   40,   45,   52,
-       51,   50,   49,   48,   47,   46,   44,   38,   37,   33,
-       19,   16,   15,   14,   13,   10,    6
+        0,    0,    7,   11,   15,   14,   15,   51,   15,   51,
+        0,   21,    0,    0,    0,   51,    0,    0,    0,    0,
+       51,    0,    0,    0,   51,   25,   30,   35,    6,   40,
+       45
     } ;
 
-static yyconst flex_int16_t yy_def[68] =
+static yyconst flex_int16_t yy_def[32] =
     {   0,
-       43,    1,   44,   44,   45,   45,   43,   43,   43,   43,
-       46,   43,   47,   48,   49,   43,    9,   12,   46,   12,
-       43,   50,   48,   49,   51,   52,   53,   54,   55,   56,
-       57,   58,   59,   60,   61,   62,   63,   64,   65,   66,
-       67,   43,    0,   43,   43,   43,   43,   43,   43,   43,
-       43,   43,   43,   43,   43,   43,   43,   43,   43,   43,
-       43,   43,   43,   43,   43,   43,   43
+       25,    1,   26,   26,   27,   27,   25,   25,   25,   25,
+       28,   25,   29,   30,   31,   25,    9,   12,   28,   12,
+       25,   29,   30,   31,    0,   25,   25,   25,   25,   25,
+       25
     } ;
 
-static yyconst flex_int16_t yy_nxt[71] =
+static yyconst flex_int16_t yy_nxt[60] =
     {   0,
         8,    9,   10,    8,   11,    8,   12,   13,    8,    8,
-       42,    8,    8,    8,   41,    8,   17,   40,   39,   38,
-       37,   18,   20,   36,   21,   14,   14,   14,   14,   14,
-       15,   15,   15,   15,   15,   19,   19,   35,   19,   19,
-       23,   34,   33,   23,   23,   24,   24,   24,   32,   24,
-       31,   30,   29,   28,   27,   26,   25,   22,   43,   16,
-       16,    7,   43,   43,   43,   43,   43,   43,   43,   43
+       22,    8,    8,    8,   25,    8,   17,   16,   16,   25,
+       25,   18,   20,   25,   21,   14,   14,   14,   14,   14,
+       15,   15,   15,   15,   15,   19,   19,   25,   19,   19,
+       23,   25,   25,   23,   23,   24,   24,   24,   25,   24,
+        7,   25,   25,   25,   25,   25,   25,   25,   25
     } ;
 
-static yyconst flex_int16_t yy_chk[71] =
+static yyconst flex_int16_t yy_chk[60] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    3,    3,
-       67,    3,    4,    4,   66,    4,    9,   65,   64,   63,
-       62,    9,   12,   61,   12,   44,   44,   44,   44,   44,
-       45,   45,   45,   45,   45,   46,   46,   60,   46,   46,
-       48,   59,   58,   48,   48,   49,   49,   49,   57,   49,
-       56,   55,   54,   53,   52,   51,   50,   47,    7,    6,
-        5,   43,   43,   43,   43,   43,   43,   43,   43,   43
+       29,    3,    4,    4,    7,    4,    9,    6,    5,    0,
+        0,    9,   12,    0,   12,   26,   26,   26,   26,   26,
+       27,   27,   27,   27,   27,   28,   28,    0,   28,   28,
+       30,    0,    0,   30,   30,   31,   31,   31,    0,   31,
+       25,   25,   25,   25,   25,   25,   25,   25,   25
     } ;
 
 /* Table of booleans, true if rule could match eol. */
@@ -513,8 +503,10 @@ char *yytext;
     #include "strutils.h"
 
     char* key;
-    char* value;
-#line 518 "src/config.lex.c"
+
+    cnf_keyval_t* cnf_keyvals_head = NULL;
+    static void AddNode();
+#line 510 "src/config.lex.c"
 
 #define INITIAL 0
 #define VALUE 1
@@ -703,9 +695,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 18 "src/config.lex.l"
+#line 20 "src/config.lex.l"
 
-#line 709 "src/config.lex.c"
+#line 701 "src/config.lex.c"
 
 	if ( !(yy_init) )
 		{
@@ -758,13 +750,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 44 )
+				if ( yy_current_state >= 26 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 62 );
+		while ( yy_base[yy_current_state] != 51 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -801,56 +793,56 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 19 "src/config.lex.l"
+#line 21 "src/config.lex.l"
 { }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 20 "src/config.lex.l"
+#line 22 "src/config.lex.l"
 { }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 21 "src/config.lex.l"
+#line 23 "src/config.lex.l"
 { }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 22 "src/config.lex.l"
+#line 24 "src/config.lex.l"
 { key = STR_strdup(yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 23 "src/config.lex.l"
+#line 25 "src/config.lex.l"
 { BEGIN(VALUE); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 24 "src/config.lex.l"
+#line 26 "src/config.lex.l"
 { BEGIN(QVALUE); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 25 "src/config.lex.l"
-{ LOG("key: '%s', value: '%s'\n", key, yytext); free(key); BEGIN(INITIAL); }
+#line 27 "src/config.lex.l"
+{ AddNode(); BEGIN(INITIAL); }
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 26 "src/config.lex.l"
-{ LOG("key: '%s', value: '%s'\n", key, yytext); free(key); }
+#line 28 "src/config.lex.l"
+{ AddNode(); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 27 "src/config.lex.l"
+#line 29 "src/config.lex.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 28 "src/config.lex.l"
+#line 30 "src/config.lex.l"
 ECHO;
 	YY_BREAK
-#line 854 "src/config.lex.c"
+#line 846 "src/config.lex.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(VALUE):
 case YY_STATE_EOF(QVALUE):
@@ -1144,7 +1136,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 44 )
+			if ( yy_current_state >= 26 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1172,11 +1164,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 44 )
+		if ( yy_current_state >= 26 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 43);
+	yy_is_jam = (yy_current_state == 25);
 
 	return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1862,6 +1854,42 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 28 "src/config.lex.l"
+#line 30 "src/config.lex.l"
 
 
+
+
+static void AddNode()
+{
+    // try to find node with same name
+    cnf_keyval_t* it = cnf_keyvals_head;
+    cnf_keyval_t* tail = NULL;
+    while (it != NULL)
+    {
+        if (strcmp(it->key, key) == 0)
+        {
+            // replace value and lineno
+            free(it->value);
+            it->value = STR_strdup(yytext);
+            it->lineno = yylineno;
+            return;
+        }
+        tail = it;
+        it = it->next;
+    }
+
+    cnf_keyval_t* newkeyval = (cnf_keyval_t*) malloc(sizeof(cnf_keyval_t));
+    newkeyval->next = NULL;
+    newkeyval->key = key;
+    newkeyval->value = STR_strdup(yytext);
+    newkeyval->lineno = yylineno;
+
+    if (tail == NULL)
+    {
+        cnf_keyvals_head = newkeyval;
+    }
+    else
+    {
+        tail->next = newkeyval;
+    }
+}

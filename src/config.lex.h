@@ -6,7 +6,7 @@ typedef struct cnf_keyval_s
     char* key;
     char* value;
     int lineno;
-    struct keyval_s* next;
+    struct cnf_keyval_s* next;
 } cnf_keyval_t;
 
 #endif

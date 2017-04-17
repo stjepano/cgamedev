@@ -32,14 +32,20 @@ void Render();
 
 void PrintConfigEntry(const char* key, const char* value)
 {
-    LOG("config entry: '%s' = '%s'\n", key, value);
+    static bool first = true;
+    if (first) 
+    {
+        LOG("Loaded configuration:\n");
+        first = false;
+    }
+    LOG("'%s' = '%s'\n", key, value);
 }
 
 int main(int argc, char** argv) 
 {
     LOG("Demo 01\n");
     CNF_Load("config.cfg", &g_config);
-    CNF_Visit(config, PrintConfigEntry);
+    CNF_Visit(g_config, PrintConfigEntry);
 
     SDL_Window* window = NULL;
     SDL_Surface* surface = NULL;
