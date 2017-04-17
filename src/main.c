@@ -25,7 +25,7 @@ GLuint  g_vbo       = 0;
 GLuint  g_ebo       = 0;
 GLuint  g_program   = 0;
 
-config_t* g_config;
+config_t* g_config = NULL;
 
 error_t InitOpenGL();
 void Render();
