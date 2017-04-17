@@ -1,5 +1,6 @@
 CC=gcc
 SH=sh
+LEX=flex
 
 3RDPARTY_INCLUDE_DIR=3rdparty/include
 COPY=cp
@@ -14,6 +15,7 @@ BUILDDIR=build
 SOURCEDIR=src
 
 HEADERS=$(wildcard $(SOURCEDIR)/*.h)
+LEXSRCS=$(wildcard $(SOURCEDIR)/*.lex.l)
 SOURCES=$(wildcard $(SOURCEDIR)/*.c)
 OBJECTS=$(patsubst $(SOURCEDIR)/%.c, $(BUILDDIR)/%.o, $(SOURCES))
 DLLS=$(wildcard $(3RDPARTY_BIN_DIR)/*.dll)
@@ -24,8 +26,13 @@ BINARY = main.exe
 
 all: $(BINARY)
 
+lex: $(SOURCEDIR)/config.lex.c
+
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.c ${HEADERS}
 	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(SOURCEDIR)/%.lex.c: $(SOURCEDIR)/%.lex.l
+	$(LEX) -o $@ $^
 
 $(BINARY): ${OBJECTS}
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
