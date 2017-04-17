@@ -1,7 +1,12 @@
 #ifndef CONFIG_LEX_H_
 #define CONFIG_LEX_H_
 
-#define CNF_KEY_SZ  21      // also change ident definition in config.lex.l
-
+typedef struct cnf_keyval_s
+{
+    char* key;
+    char* value;
+    int lineno;
+    struct keyval_s* next;
+} cnf_keyval_t;
 
 #endif

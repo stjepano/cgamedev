@@ -10,9 +10,12 @@
     #include "strutils.h"
 
     char* key;
+
+    keyval_t* cnf_keyvals_head = NULL;
+    static void AddNode();
 %}
 
-ident       [a-zA-Z][a-zA-Z0-9_]{0,19}
+ident       [a-zA-Z][a-zA-Z0-9_]*
 
 %%
 \n              { }
@@ -21,7 +24,43 @@ ident       [a-zA-Z][a-zA-Z0-9_]{0,19}
 {ident}         { key = STR_strdup(yytext); }
 [ \t]*=[ \t]*   { BEGIN(VALUE); }
 [ \t]*=[ \t]*["]   { BEGIN(QVALUE); }
-<VALUE>[^ \t#\n]*  { LOG("key: '%s', value: '%s'\n", key, yytext); free(key); BEGIN(INITIAL); }
-<QVALUE>[^"]* { LOG("key: '%s', value: '%s'\n", key, yytext); free(key); }
+<VALUE>[^ \t#\n]*  { AddNode(); BEGIN(INITIAL); }
+<QVALUE>[^"]* { AddNode(); }
 <QVALUE>["]   { BEGIN(INITIAL); }
 %%
+
+
+static void AddNode()
+{
+    // try to find node with same name
+    cnf_keyval_t* it = cnf_keyvals_head;
+    cnf_keyval_t* tail = NULL;
+    while (it != null)
+    {
+        if (strcmp(it->key, key) == 0)
+        {
+            // replace value and lineno
+            FREE(it->value);
+            it->value = STR_strdup(yytext);
+            it->lineno = yylineno;
+            return;
+        }
+        tail = it;
+        it = it->next;
+    }
+
+    cnf_keyval_t* newkeywal = (cnf_keyval_t*) malloc(sizeof(cnf_keyval_t));
+    newkeyval->next = NULL;
+    newkeyval->key = key;
+    newkeyval->value = STR_strdup(yytext);
+    newkeyval->lineno = yylineno;
+
+    if (tail == NULL)
+    {
+        cnf_keyvals_head = newkeyval;
+    }
+    else
+    {
+        tail->next = newkeyval;
+    }
+}
